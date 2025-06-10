@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONNX Runtime</title>
+    <script src="./dist/utils.js" type="module"></script>
+</head>
+<body>
+    <input type="file" id="imageInput" accept="image/*">
+    <button id="runBtn">Run Inference</button>
+    <br>
+    <canvas id="imageCanvas" width="512" height="512"></canvas>
+    <canvas id="maskCanvas" width="512" height="512"></canvas>
+    <script type="module">
+        await window.utils.loadModel();
+        window.utils.setupImageInput("imageInput", "imageCanvas")
+        document.getElementById("runBtn").addEventListener("click", async () => {
+            const canvas = document.getElementById("imageCanvas");
+            if (!canvas) return;
+            const mask = await window.utils.runInference(canvas);
+            if (mask){
+                window.utils.drawMask("maskCanvas", mask);
+            }
+        })
+    </script>
+</body>
+</html>
