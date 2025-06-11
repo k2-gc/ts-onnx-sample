@@ -22,10 +22,7 @@ Pretrained model was trained with pytorch and then exported to onnx including pr
 ## Usage
 ### Build
 ```bash
-$ npm init -y
-$ npm install typescript onnxruntime-web esbuild --save-dev
-$ npx tsc --init
-$ mkdir dist
+$ npm install 
 $ npm run build
 ```
 
